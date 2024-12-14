@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.medication_dispenser">
+    
+    <!-- Bluetooth permissions for all Android versions -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    
+    <!-- Location permissions required for Bluetooth scanning on older Android versions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
+    <!-- Bluetooth permissions for Android 12 and above -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" android:required="true" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:required="true" />
+    
+    <!-- Internet permission for potential future cloud sync features -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Required hardware features -->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+    
+    <!-- Optional: allow installation only on devices with Bluetooth LE -->
+    <uses-feature 
+        android:name="android.hardware.bluetooth_le" 
+        android:required="true" />
+    
+    <application
+        android:label="Medication Dispenser"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+    
+    <!-- Queries for Bluetooth device discovery -->
+    <queries>
+        <intent>
+            <action android:name="android.bluetooth.device.action.FOUND" />
+        </intent>
+        <intent>
+            <action android:name="android.bluetooth.adapter.action.DISCOVERY_STARTED" />
+        </intent>
+        <intent>
+            <action android:name="android.bluetooth.adapter.action.DISCOVERY_FINISHED" />
+        </intent>
+    </queries>
+</manifest>
